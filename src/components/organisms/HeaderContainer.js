@@ -8,18 +8,17 @@ const StyledHeaderContainer = styled.div`
   display: flex;
   left: 50%;
   transform: translateX(-50%);
-  height: 80px;
   padding: 10px 0 0 0;
   z-index: 101;
-
   @media (max-width: 1000px) {
-    /* width: 0; */
-    left: 0px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     transform: translateX(0%);
-
+    width: 100%;
+    height: 0%;
     &.active {
-      backdrop-filter: blur(20px);
-      width: 100%;
       height: 100%;
       .toggle {
         display: none;

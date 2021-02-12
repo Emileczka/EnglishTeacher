@@ -3,8 +3,8 @@ import styled from "styled-components";
 import MenuElement from "../molecules/MenuElement";
 
 const StyledWrapper = styled.ul`
-  /* position: relative; */
   display: flex;
+  align-items: center;
   margin: 0;
   padding: 0;
   @media (max-width: 1000px) {
@@ -12,27 +12,18 @@ const StyledWrapper = styled.ul`
       display: none;
     }
     flex-direction: column;
-    position: absolute;
-    margin-left: 0;
-    top: 60px;
-    width: 100%;
-    height: calc(100vh - 60px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
     padding: 60px 0px;
     text-align: center;
-    overflow: auto;
-    background: transparent;
-    opacity: 0;
-    display: none;
-    /* transform: translateX(100%); */
-    /* transition: 0.5s; */
-
+    transform: scale(0);
     &.active {
-      transform: translateX(0);
-      width: 100%;
-      height: calc(100vh - 60px);
       opacity: 1;
-      display: block;
-      top: 60px;
+      transform: scale(1);
+      backdrop-filter: blur(20px);
     }
   }
 `;

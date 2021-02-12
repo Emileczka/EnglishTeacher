@@ -10,6 +10,7 @@ import Contact from "../components/organisms/Contact";
 import Background from "../components/atoms/Background";
 import MediaIcons from "../components/atoms/MediaIcons";
 import HeaderContainer from "../components/organisms/HeaderContainer";
+import Mouse from "../components/atoms/Mouse";
 
 import Swiper, {
   Pagination,
@@ -45,27 +46,19 @@ const SwiperScrollbar = styled.div`
 `;
 
 const SwiperNavigation = styled.div`
-  bottom: 20px;
+  bottom: 0px;
   left: 50%;
-  transform: translateX(-50%);
   top: unset;
   position: absolute;
   transform: translateX(-50%) rotate(90deg);
-  color: ${({ theme }) => theme.green};
+  padding-right: 90px;
+  opacity: 0;
   &.swiper-button-disabled {
     display: none;
   }
-`;
-
-const ScrollTopSwiperNavigation = styled.div`
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: unset;
-  display: none;
-  transform: translateX(-50%) rotate(90deg);
-  position: absolute;
-  color: ${({ theme }) => theme.green};
+  &.swiper-button-prev {
+    padding-right: 120px;
+  }
 `;
 
 const IndexPage = () => {
@@ -132,15 +125,18 @@ const IndexPage = () => {
         },
         on: {
           slideChange: function (e) {
+            const navigationPrev = document.getElementsByClassName(
+              "swiper-button-prev"
+            )[0];
+            const scrollMouse = document.getElementById("scrollMouse");
             setSwiperIndex(e.realIndex);
-            if (e.realIndex === 3)
-              document.getElementsByClassName(
-                "swiper-button-prev"
-              )[0].style.display = "block";
-            else
-              document.getElementsByClassName(
-                "swiper-button-prev"
-              )[0].style.display = "none";
+            if (e.realIndex === 3) {
+              navigationPrev.style.display = "block";
+              scrollMouse.classList.add("last");
+            } else {
+              navigationPrev.style.display = "none";
+              scrollMouse.classList.remove("last");
+            }
           },
         },
       })
@@ -149,7 +145,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     if (!swiper) return;
-    document.getElementById("menu").style.transition = "1s";
+    document.getElementById("menu").style.transition = "0.5s";
     SlideToSection();
     window.onhashchange = () => {
       SlideToSection();
@@ -163,6 +159,7 @@ const IndexPage = () => {
       <div className="swiper-container" style={{ height: "100vh" }}>
         <Background />
         <MediaIcons />
+        <Mouse />
         <div className="swiper-wrapper">
           <section data-hash="home" className="swiper-slide">
             <Home />
@@ -180,7 +177,7 @@ const IndexPage = () => {
         <SwiperPagination className="swiper-pagination" />
         <SwiperScrollbar className="swiper-scrollbar" />
         <SwiperNavigation className="swiper-button-next" />
-        <ScrollTopSwiperNavigation
+        <SwiperNavigation
           className="swiper-button-prev"
           onClick={() => swiper.slideTo(0)}
         />

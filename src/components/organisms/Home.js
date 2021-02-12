@@ -4,10 +4,10 @@ import Image from "../atoms/Image";
 import SectionHeader from "../atoms/SectionHeader";
 
 const StyledContainer = styled.div`
-  display: grid;
   width: 100%;
   height: 100%;
   padding: 100px;
+  display: grid;
   grid-template-columns: minmax(350px, 1fr) 2fr;
   grid-template-rows: 1fr 1fr;
   gap: 20px 20px;
